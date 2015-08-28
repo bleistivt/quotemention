@@ -74,6 +74,7 @@ jQuery(function ($) {
                 content: '<span class="Progress"/>',
                 contentAsHTML: true,
                 trigger: 'custom',
+                position: 'bottom',
                 updateAnimation: false,
                 theme: 'tooltipster-vanilla',
                 maxWidth: gdn.definition('quoteMention.maxWidth', 350)

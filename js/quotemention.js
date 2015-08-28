@@ -62,6 +62,9 @@ jQuery(function ($) {
 
 
     function init() {
+        var maxWidth = gdn.definition('quoteMention.maxWidth', 350),
+            position = gdn.definition('quoteMention.position', 'bottom');
+
         // Initialized mentions get the "quoteMention" class.
         jQuery('.ItemComment .Message a:not(.quoteMention)')
             .filter(function (ignore, elem) {
@@ -74,10 +77,10 @@ jQuery(function ($) {
                 content: '<span class="Progress"/>',
                 contentAsHTML: true,
                 trigger: 'custom',
-                position: 'bottom',
+                position: position,
                 updateAnimation: false,
                 theme: 'tooltipster-vanilla',
-                maxWidth: gdn.definition('quoteMention.maxWidth', 350)
+                maxWidth: maxWidth
             }).hover(show, hide);
     }
 

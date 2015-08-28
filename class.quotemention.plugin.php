@@ -24,6 +24,7 @@ class QuoteMentionPlugin extends Gdn_Plugin {
         $sender->addJsFile('quotemention.min.js', 'plugins/quotemention');
 
         $sender->addDefinition('quoteMention.maxWidth', (int)c('QuoteMention.MaxWidth', 350));
+        $sender->addDefinition('quoteMention.position', c('QuoteMention.Position', 'bottom'));
     }
 
 

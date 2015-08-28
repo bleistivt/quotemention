@@ -16,6 +16,9 @@ Since users often use mentions in order to reply directly to another user, this 
   // Maximum width of the tooltip (pixels).
   $Configuration['QuoteMention']['MaxWidth'] = 350;
   
+  // Position of the tooltip (top, bottom, left, right, top-left, ...).
+  $Configuration['QuoteMention']['Position'] = 'bottom';
+  
   //Maximum length of the content shown in the tooltip.
   $Configuration['QuoteMention']['MaxLength'] = 400;
 ```

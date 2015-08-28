@@ -63,7 +63,7 @@ jQuery(function ($) {
 
     function init() {
         // Initialized mentions get the "quoteMention" class.
-        jQuery('.Message a:not(.quoteMention)')
+        jQuery('.ItemComment .Message a:not(.quoteMention)')
             .filter(function (ignore, elem) {
                 // Only grab links that start with an @.
                 return elem.innerHTML.substring(0, 1) === '@';

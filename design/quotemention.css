@@ -1,0 +1,20 @@
+.mentionHighlight {
+    background-color: #ffb;
+    transition: background-color .4s;
+}
+
+/* Style Tooltipster to look like Vanilla's flyout menus. */
+
+.tooltipster-vanilla {
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #999;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    color: #2c2c2c;
+}
+
+.tooltipster-vanilla .tooltipster-content {
+    font-size: 11px;
+    line-height: 1.7em;
+    padding: 8px 10px;
+}

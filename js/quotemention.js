@@ -28,7 +28,7 @@ jQuery(function ($) {
                         '/' + encodeURIComponent(username)
             ))
 
-                .success(function (data) {
+                .done(function (data) {
                     mention
                         // Replace the content with the actual post.
                         .tooltipster('content', data.html)

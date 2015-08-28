@@ -8,7 +8,7 @@ This mechanism works across pages.
 
 Since users often use mentions in order to reply directly to another user, this can be used as an effective replacement for a quote system.
 
-<img src="http://cd8ba0b44a15c10065fd-24461f391e20b7336331d5789078af53.r23.cf1.rackcdn.com/www.vanillaforums.org/editor/yg/i2osh039qzlm.gif">
+![functionality preview](http://cd8ba0b44a15c10065fd-24461f391e20b7336331d5789078af53.r23.cf1.rackcdn.com/www.vanillaforums.org/editor/yg/i2osh039qzlm.gif)
 
 ## Options
 

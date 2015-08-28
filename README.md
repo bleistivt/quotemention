@@ -2,7 +2,7 @@
 
 Vanilla plugin: Show a mentioned user's previous comment in a tooltip.
 
-Hovering over a mention in a comment will open a tooltip showing the previous comment the referenced user has written in that discussion (if any). Aditionally, the referenced post is highlighted if is is visible in the viewport.
+Hovering over a mention in a comment will open a tooltip showing the previous comment the referenced user has written in that discussion (if any). Aditionally, the referenced post is highlighted if it is visible in the viewport.
 
 This mechanism works across pages.
 

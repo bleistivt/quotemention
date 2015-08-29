@@ -98,6 +98,7 @@ jQuery(function ($) {
                 contentAsHTML: true,
                 trigger: 'custom',
                 position: position,
+                speed: 0,
                 updateAnimation: false,
                 theme: 'tooltipster-vanilla',
                 maxWidth: maxWidth

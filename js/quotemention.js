@@ -1,33 +1,42 @@
-/*global document, gdn, jQuery*/
+/*global document, window, gdn, jQuery*/
 
 jQuery(function ($) {
     'use strict';
 
-    function show(e) {
-        var mention = $(e.currentTarget),
-            commentID,
-            username;
+    // Check if an element's top is visible in the viewport.
+    function inview(target) {
+        target = $(target);
+        return $(target).length && $(target).offset().top > window.pageYOffset;
+    }
 
-        mention
-            .tooltipster('show')
-            // Tooltipster doesn't have an "isVisible" API, so we need to keep track of this manually.
-            .data('tooltipOpen', '1');
+
+    // Find the previous comment of the mentioned user in this discussion.
+    function get(mention) {
+        // Extract the CommentID or DiscussionID from the parent item.
+        var commentID = mention.closest('.Item')[0].id.replace(/\D+/, ''),
+        // Extract the name of the mentioned user.
+            username = mention[0].innerHTML.replace(/^@"?(.*?)"?$/, '$1');
+
+        return $.getJSON(gdn.url(
+            'plugin/quotemention' +
+                    '/' + gdn.definition('DiscussionID') +
+                    '/' + commentID +
+                    '/' + encodeURIComponent(username)
+        ));
+    }
+
+
+    // mouseenter handler: Show a tooltip and/or hightlight a post.
+    function show(e) {
+        var mention = $(e.currentTarget)
+                // Keep track of the hover state manually for the "done" callback.
+                .data('mouseOver', '1'),
+            target;
 
         if (mention.data('quoteMention')) {
-            $(mention.data('quoteMention')).addClass('mentionHighlight');
+            target = $(mention.data('quoteMention')).addClass('mentionHighlight');
         } else {
-            // Extract the CommentID or DiscussionID from the parent item.
-            commentID = mention.closest('.Item')[0].id.replace(/\D+/, '');
-            // Extract the name of the mentioned user.
-            username = e.currentTarget.innerHTML.replace(/^@"?(.*?)"?$/, '$1');
-
-            $.getJSON(gdn.url(
-                'plugin/quotemention' +
-                        '/' + gdn.definition('DiscussionID') +
-                        '/' + commentID +
-                        '/' + encodeURIComponent(username)
-            ))
-
+            get(mention)
                 .done(function (data) {
                     mention
                         // Replace the content with the actual post.
@@ -35,12 +44,16 @@ jQuery(function ($) {
                         // Save the target for highlighting.
                         .data('quoteMention', data.target);
 
-                    // If the tooltip is still open, highlight the referenced post.
-                    if (mention.data('tooltipOpen')) {
-                        $(data.target).addClass('mentionHighlight');
+                    // If the mouse is still over the element, highlight the referenced post.
+                    if (mention.data('mouseOver')) {
+                        target = $(data.target).addClass('mentionHighlight');
+
+                        // Hide the tooltip if the target post is visible.
+                        if (inview(target)) {
+                            mention.tooltipster('hide');
+                        }
                     }
                 })
-
                 .fail(function () {
                     // No post found or request failed: Remove the tooltip.
                     mention
@@ -49,18 +62,25 @@ jQuery(function ($) {
                         .data('quoteMention', true);
                 });
         }
+
+        // Show the tooltip if it is loading or if the post is not fully visible.
+        if (!inview(target)) {
+            mention.tooltipster('show');
+        }
     }
 
 
+    // mouseleave handler: Hide a tooltip.
     function hide(e) {
         var mention = $(e.currentTarget)
             .tooltipster('hide')
-            .data('tooltipOpen', '');
+            .data('mouseOver', '');
 
         $(mention.data('quoteMention')).removeClass('mentionHighlight');
     }
 
 
+    // Register event handlers for all mentions on the page.
     function init() {
         var maxWidth = gdn.definition('quoteMention.maxWidth', 350),
             position = gdn.definition('quoteMention.position', 'bottom');

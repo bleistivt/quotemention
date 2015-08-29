@@ -38,12 +38,6 @@ jQuery(function ($) {
         } else {
             get(mention)
                 .done(function (data) {
-                    mention
-                        // Replace the content with the actual post.
-                        .tooltipster('content', data.html)
-                        // Save the target for highlighting.
-                        .data('quoteMention', data.target);
-
                     // If the mouse is still over the element, highlight the referenced post.
                     if (mention.data('mouseOver')) {
                         target = $(data.target).addClass('mentionHighlight');
@@ -53,6 +47,12 @@ jQuery(function ($) {
                             mention.tooltipster('hide');
                         }
                     }
+
+                    mention
+                        // Replace the content with the actual post.
+                        .tooltipster('content', data.html)
+                        // Save the target for highlighting.
+                        .data('quoteMention', data.target);
                 })
                 .fail(function () {
                     // No post found or request failed: Remove the tooltip.

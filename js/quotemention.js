@@ -6,7 +6,7 @@ jQuery(function ($) {
     // Check if an element's top is visible in the viewport.
     function inview(target) {
         target = $(target);
-        return $(target).length && $(target).offset().top > window.pageYOffset;
+        return target.length && target.offset().top > window.pageYOffset;
     }
 
 

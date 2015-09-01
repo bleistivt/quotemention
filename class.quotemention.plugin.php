@@ -6,7 +6,9 @@ $PluginInfo['quotemention'] = array(
     'Version' => '0.2',
     'Author' => 'Bleistivt',
     'AuthorUrl' => 'http://bleistivt.net',
-    'License' => 'GNU GPL2'
+    'License' => 'GNU GPL2',
+    'SettingsPermission' => 'Garden.Settings.Manage',
+    'SettingsUrl' => 'settings/quotemention'
 );
 
 class QuoteMentionPlugin extends Gdn_Plugin {
@@ -76,6 +78,45 @@ class QuoteMentionPlugin extends Gdn_Plugin {
             )),
             'target' => $target
         ) : array());
+    }
+
+
+    // Settings page
+    public function settingsController_quoteMention_create($sender) {
+        $sender->permission('Garden.Settings.Manage');
+        $sender->addSideMenu();
+
+        $conf = new ConfigurationModule($sender);
+        $conf->initialize(array(
+            'QuoteMention.MaxWidth' => array(
+                'Control' => 'textbox',
+                'LabelCode' => 'Maximum width (px) of the tooltip',
+                'Default' => 350
+            ),
+            'QuoteMention.Position' => array(
+                'Control' => 'dropdown',
+                'LabelCode' => 'Position of the tooltip'
+                'Items' => array(
+                    'bottom', 'bottom-left', 'left', 'top-left',
+                    'top', 'top-right', 'right', 'bottom-right'
+                ),
+                'Default' => 'bottom'
+            ),
+            'QuoteMention.ShowProgress' => array(
+                'Control' => 'CheckBox',
+                'LabelCode' => 'Show a progress indicator when loading contents.',
+                'Default' => true
+            ),
+            'QuoteMention.MaxLength' => array(
+                'Control' => 'textbox',
+                'LabelCode' => 'Maximum characters shown in the tooltip',
+                'Default' => 400
+            )
+
+        ));
+
+        $sender->title(sprintf(t('%s Settings'), 'Quote Mentions'));
+        $conf->renderAll();
     }
 
 }

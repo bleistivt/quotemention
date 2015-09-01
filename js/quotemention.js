@@ -31,6 +31,7 @@ jQuery(function ($) {
         var mention = $(e.currentTarget)
                 // Keep track of the hover state manually for the "done" callback.
                 .data('mouseOver', '1'),
+            showProgress = gdn.definition('quoteMention.showProgress', true),
             target;
 
         if (mention.data('quoteMention')) {
@@ -43,9 +44,7 @@ jQuery(function ($) {
                         target = $(data.target).addClass('mentionHighlight');
 
                         // Hide the tooltip if the target post is visible.
-                        if (inview(target)) {
-                            mention.tooltipster('hide');
-                        }
+                        mention.tooltipster(inview(target) ? 'hide' : 'show');
                     }
 
                     mention
@@ -64,7 +63,7 @@ jQuery(function ($) {
         }
 
         // Show the tooltip if it is loading or if the post is not fully visible.
-        if (!inview(target)) {
+        if (!inview(target) && showProgress) {
             mention.tooltipster('show');
         }
     }

@@ -25,6 +25,7 @@ class QuoteMentionPlugin extends Gdn_Plugin {
 
         $sender->addDefinition('quoteMention.maxWidth', (int)c('QuoteMention.MaxWidth', 350));
         $sender->addDefinition('quoteMention.position', c('QuoteMention.Position', 'bottom'));
+        $sender->addDefinition('quoteMention.showProgress', c('QuoteMention.ShowProgress', true));
     }
 
 

@@ -19,7 +19,10 @@ Since users often use mentions in order to reply directly to another user, this 
   // Position of the tooltip (top, bottom, left, right, top-left, ...).
   $Configuration['QuoteMention']['Position'] = 'bottom';
   
-  //Maximum length of the content shown in the tooltip.
+  // Show a progress indicator until tooltip contents are loaded.
+  $Configuration['QuoteMention']['ShowProgress'] = true;
+  
+  // Maximum length of the content shown in the tooltip.
   $Configuration['QuoteMention']['MaxLength'] = 400;
 ```
 

@@ -64,7 +64,7 @@ jQuery(function ($) {
         }
 
         // Show the tooltip if it is loading or if the post is not fully visible.
-        if (showProgress && !loaded || !inview(target)) {
+        if (!loaded && showProgress || loaded && !inview(target)) {
             mention.tooltipster('show');
         }
     }

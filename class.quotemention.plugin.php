@@ -95,7 +95,7 @@ class QuoteMentionPlugin extends Gdn_Plugin {
             ),
             'QuoteMention.Position' => array(
                 'Control' => 'dropdown',
-                'LabelCode' => 'Position of the tooltip'
+                'LabelCode' => 'Position of the tooltip',
                 'Items' => array(
                     'bottom', 'bottom-left', 'left', 'top-left',
                     'top', 'top-right', 'right', 'bottom-right'

@@ -31,11 +31,12 @@ jQuery(function ($) {
         var mention = $(e.currentTarget)
                 // Keep track of the hover state manually for the "done" callback.
                 .data('mouseOver', '1'),
+            loaded = mention.data('quoteMention'),
             showProgress = gdn.definition('quoteMention.showProgress', true),
             target;
 
-        if (mention.data('quoteMention')) {
-            target = $(mention.data('quoteMention')).addClass('mentionHighlight');
+        if (loaded) {
+            target = $(loaded).addClass('mentionHighlight');
         } else {
             get(mention)
                 .done(function (data) {
@@ -63,7 +64,7 @@ jQuery(function ($) {
         }
 
         // Show the tooltip if it is loading or if the post is not fully visible.
-        if (!inview(target) && showProgress) {
+        if (showProgress && !loaded || !inview(target)) {
             mention.tooltipster('show');
         }
     }

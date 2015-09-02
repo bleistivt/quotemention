@@ -112,7 +112,6 @@ class QuoteMentionPlugin extends Gdn_Plugin {
                 'LabelCode' => 'Maximum characters shown in the tooltip',
                 'Default' => 400
             )
-
         ));
 
         $sender->title(sprintf(t('%s Settings'), 'Quote Mentions'));

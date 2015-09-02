@@ -97,8 +97,14 @@ class QuoteMentionPlugin extends Gdn_Plugin {
                 'Control' => 'dropdown',
                 'LabelCode' => 'Position of the tooltip',
                 'Items' => array(
-                    'bottom', 'bottom-left', 'left', 'top-left',
-                    'top', 'top-right', 'right', 'bottom-right'
+                    'bottom' => 'bottom',
+                    'bottom-left' => 'bottom-left',
+                    'left' => 'left',
+                    'top-left' => 'top-left',
+                    'top' => 'top',
+                    'top-right' => 'top-right',
+                    'right' => 'right',
+                    'bottom-right' => 'bottom-right'
                 ),
                 'Default' => 'bottom'
             ),

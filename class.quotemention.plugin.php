@@ -1,6 +1,6 @@
 <?php
 
-$PluginInfo['quotemention'] = array(
+$PluginInfo['quotemention'] = [
     'Name' => 'Quote Mentions',
     'Description' => 'Show a mentioned user\'s previous comment in a tooltip.',
     'Version' => '0.2',
@@ -9,7 +9,7 @@ $PluginInfo['quotemention'] = array(
     'License' => 'GNU GPL2',
     'SettingsPermission' => 'Garden.Settings.Manage',
     'SettingsUrl' => 'settings/quotemention'
-);
+];
 
 class QuoteMentionPlugin extends Gdn_Plugin {
 
@@ -51,11 +51,11 @@ class QuoteMentionPlugin extends Gdn_Plugin {
         );
 
         // Find the previous comment of the mentioned user in this discussion.
-        $item = Gdn::sql()->getWhere('Comment', array(
+        $item = Gdn::sql()->getWhere('Comment', [
             'DiscussionID' => $discussion->DiscussionID,
             'InsertUserID' => $user->UserID,
             'CommentID <' => $commentID
-        ), 'CommentID', 'desc', 1)->firstRow();
+        ], 'CommentID', 'desc', 1)->firstRow();
 
         // The items ID in the DOM used for highlighting.
         if ($item) {
@@ -71,13 +71,13 @@ class QuoteMentionPlugin extends Gdn_Plugin {
             $sender->statusCode(404);
         }
 
-        $sender->renderData($item ? array(
+        $sender->renderData($item ? [
             'html' => nl2br(sliceString(
                 Gdn_Format::plainText($item->Body, $item->Format),
                 c('QuoteMention.MaxLength', 400)
             )),
             'target' => $target
-        ) : array());
+        ] : []);
     }
 
 
@@ -87,16 +87,16 @@ class QuoteMentionPlugin extends Gdn_Plugin {
         $sender->addSideMenu();
 
         $conf = new ConfigurationModule($sender);
-        $conf->initialize(array(
-            'QuoteMention.MaxWidth' => array(
+        $conf->initialize([
+            'QuoteMention.MaxWidth' => [
                 'Control' => 'textbox',
                 'LabelCode' => 'Maximum width (px) of the tooltip',
                 'Default' => 350
-            ),
-            'QuoteMention.Position' => array(
+            ],
+            'QuoteMention.Position' => [
                 'Control' => 'dropdown',
                 'LabelCode' => 'Position of the tooltip',
-                'Items' => array(
+                'Items' => [
                     'bottom' => 'bottom',
                     'bottom-left' => 'bottom-left',
                     'left' => 'left',
@@ -105,20 +105,20 @@ class QuoteMentionPlugin extends Gdn_Plugin {
                     'top-right' => 'top-right',
                     'right' => 'right',
                     'bottom-right' => 'bottom-right'
-                ),
+                ],
                 'Default' => 'bottom'
-            ),
-            'QuoteMention.ShowProgress' => array(
+            ],
+            'QuoteMention.ShowProgress' => [
                 'Control' => 'CheckBox',
                 'LabelCode' => 'Show a progress indicator when loading contents.',
                 'Default' => true
-            ),
-            'QuoteMention.MaxLength' => array(
+            ],
+            'QuoteMention.MaxLength' => [
                 'Control' => 'textbox',
                 'LabelCode' => 'Maximum characters shown in the tooltip',
                 'Default' => 400
-            )
-        ));
+            ]
+        ]);
 
         $sender->title(sprintf(t('%s Settings'), 'Quote Mentions'));
         $conf->renderAll();

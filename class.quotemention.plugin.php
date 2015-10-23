@@ -14,16 +14,14 @@ $PluginInfo['quotemention'] = [
 class QuoteMentionPlugin extends Gdn_Plugin {
 
     public function assetModel_styleCss_handler($sender) {
-        //$sender->addCssFile('tooltipster.css', 'plugins/quotemention');
-        //$sender->addCssFile('quotemention.css', 'plugins/quotemention');
-        $sender->addCssFile('quotemention.min.css', 'plugins/quotemention');
+        $sender->addCssFile('tooltipster.css', 'plugins/quotemention');
+        $sender->addCssFile('quotemention.css', 'plugins/quotemention');
     }
 
 
     public function discussionController_initialize_handler($sender) {
-        //$sender->addJsFile('jquery.tooltipster.min.js', 'plugins/quotemention');
-        //$sender->addJsFile('quotemention.js', 'plugins/quotemention');
-        $sender->addJsFile('quotemention.min.js', 'plugins/quotemention');
+        $sender->addJsFile('jquery.tooltipster.min.js', 'plugins/quotemention');
+        $sender->addJsFile('quotemention.js', 'plugins/quotemention');
 
         $sender->addDefinition('quoteMention.maxWidth', (int)c('QuoteMention.MaxWidth', 350));
         $sender->addDefinition('quoteMention.position', c('QuoteMention.Position', 'bottom'));

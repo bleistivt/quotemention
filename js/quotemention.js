@@ -35,7 +35,7 @@ jQuery(function ($) {
             showProgress = gdn.definition('quoteMention.showProgress', true),
             target;
 
-        if (loaded) {
+        if (loaded !== null) {
             target = $(loaded).addClass('mentionHighlight');
         } else {
             get(mention)
@@ -59,7 +59,7 @@ jQuery(function ($) {
                     mention
                         .tooltipster('disable')
                         // Prevent further requests.
-                        .data('quoteMention', true);
+                        .data('quoteMention', false);
                 });
         }
 

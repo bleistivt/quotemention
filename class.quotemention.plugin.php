@@ -3,7 +3,7 @@
 $PluginInfo['quotemention'] = [
     'Name' => 'Quote Mentions',
     'Description' => 'Show a mentioned user\'s previous comment in a tooltip.',
-    'Version' => '0.2',
+    'Version' => '0.3',
     'Author' => 'Bleistivt',
     'AuthorUrl' => 'http://bleistivt.net',
     'License' => 'GNU GPL2',

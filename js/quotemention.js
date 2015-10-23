@@ -35,7 +35,7 @@ jQuery(function ($) {
             showProgress = gdn.definition('quoteMention.showProgress', true),
             target;
 
-        if (loaded !== null) {
+        if (loaded !== undefined) {
             target = $(loaded).addClass('mentionHighlight');
         } else {
             get(mention)

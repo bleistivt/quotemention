@@ -26,7 +26,7 @@ jQuery(function ($) {
     }
 
 
-    // mouseenter handler: Show a tooltip and/or hightlight a post.
+    // mouseenter handler: Show a tooltip and/or highlight a post.
     function show(e) {
         var mention = $(e.currentTarget)
                 // Keep track of the hover state manually for the "done" callback.

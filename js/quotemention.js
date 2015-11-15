@@ -86,7 +86,7 @@ jQuery(function ($) {
             position = gdn.definition('quoteMention.position', 'bottom');
 
         // Initialized mentions get the "quoteMention" class.
-        jQuery('.ItemComment .Message a:not(.quoteMention)')
+        $('.ItemComment .Message a:not(.quoteMention)')
             .filter(function (ignore, elem) {
                 // Only grab links that start with an @.
                 return elem.innerHTML.substring(0, 1) === '@';

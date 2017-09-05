@@ -1,7 +1,7 @@
 {
     "name": "Quote Mentions",
     "description": "Show a mentioned user's previous comment in a tooltip.",
-    "version": "0.3",
+    "version": "0.4",
     "license": "GNU GPL2",
     "mobileFriendly": false,
     "settingsPermission": "Garden.Settings.Manage",

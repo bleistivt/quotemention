@@ -1,17 +1,5 @@
 <?php
 
-$PluginInfo['quotemention'] = [
-    'Name' => 'Quote Mentions',
-    'Description' => 'Show a mentioned user\'s previous comment in a tooltip.',
-    'Version' => '0.4',
-    'Author' => 'Bleistivt',
-    'AuthorUrl' => 'http://bleistivt.net',
-    'License' => 'GNU GPL2',
-    'MobileFriendly' => false,
-    'SettingsPermission' => 'Garden.Settings.Manage',
-    'SettingsUrl' => 'settings/quotemention'
-];
-
 class QuoteMentionPlugin extends Gdn_Plugin {
 
     public function assetModel_styleCss_handler($sender) {
@@ -83,7 +71,6 @@ class QuoteMentionPlugin extends Gdn_Plugin {
     // Settings page
     public function settingsController_quoteMention_create($sender) {
         $sender->permission('Garden.Settings.Manage');
-        $sender->addSideMenu();
 
         $conf = new ConfigurationModule($sender);
         $conf->initialize([

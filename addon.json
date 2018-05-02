@@ -3,6 +3,7 @@
     "description": "Show a mentioned user's previous comment in a tooltip.",
     "version": "0.4",
     "license": "GNU GPL2",
+    "gitHub": "bleistivt/quotemention",
     "mobileFriendly": false,
     "settingsPermission": "Garden.Settings.Manage",
     "settingsUrl": "settings/quotemention",

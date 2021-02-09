@@ -12,9 +12,9 @@ class QuoteMentionPlugin extends Gdn_Plugin {
         $sender->addJsFile('jquery.tooltipster.min.js', 'plugins/quotemention');
         $sender->addJsFile('quotemention.js', 'plugins/quotemention');
 
-        $sender->addDefinition('quoteMention.maxWidth', (int)c('QuoteMention.MaxWidth', 350));
-        $sender->addDefinition('quoteMention.position', c('QuoteMention.Position', 'bottom'));
-        $sender->addDefinition('quoteMention.showProgress', c('QuoteMention.ShowProgress', true));
+        $sender->addDefinition('quoteMention.maxWidth', (int)Gdn::config('QuoteMention.MaxWidth', 350));
+        $sender->addDefinition('quoteMention.position', Gdn::config('QuoteMention.Position', 'bottom'));
+        $sender->addDefinition('quoteMention.showProgress', Gdn::config('QuoteMention.ShowProgress', true));
     }
 
 
@@ -61,7 +61,7 @@ class QuoteMentionPlugin extends Gdn_Plugin {
         $sender->renderData($item ? [
             'html' => nl2br(sliceString(
                 Gdn_Format::plainText($item->Body, $item->Format),
-                c('QuoteMention.MaxLength', 400)
+                Gdn::config('QuoteMention.MaxLength', 400)
             )),
             'target' => $target
         ] : []);
@@ -106,7 +106,7 @@ class QuoteMentionPlugin extends Gdn_Plugin {
             ]
         ]);
 
-        $sender->title(sprintf(t('%s Settings'), 'Quote Mentions'));
+        $sender->title(sprintf(Gdn::translate('%s Settings'), 'Quote Mentions'));
         $conf->renderAll();
     }
 

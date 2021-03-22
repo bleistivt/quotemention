@@ -1,8 +1,6 @@
 /*global document, window, gdn, jQuery*/
 
-jQuery(function ($) {
-    'use strict';
-
+jQuery(($) => {
     // Check if an element's top is visible in the viewport.
     function inview(target) {
         target = $(target);
@@ -13,9 +11,10 @@ jQuery(function ($) {
     // Find the previous comment of the mentioned user in this discussion.
     function get(mention) {
         // Extract the CommentID or DiscussionID from the parent item.
-        var commentID = mention.closest('.Item')[0].id.replace(/\D+/, ''),
+        const commentID = mention.closest('.Item')[0].id.replace(/\D+/, '');
+
         // Extract the name of the mentioned user.
-            username = mention[0].innerHTML.replace(/^@"?(.*?)"?$/, '$1');
+        const username = mention[0].innerHTML.replace(/^@"?(.*?)"?$/, '$1');
 
         return $.getJSON(gdn.url(
             'plugin/quotemention' +
@@ -27,19 +26,20 @@ jQuery(function ($) {
 
 
     // mouseenter handler: Show a tooltip and/or highlight a post.
-    function show(e) {
-        var mention = $(e.currentTarget)
+    function show({currentTarget}) {
+        const mention = $(currentTarget)
                 // Keep track of the hover state manually for the "done" callback.
-                .data('mouseOver', '1'),
-            loaded = mention.data('quoteMention'),
-            showProgress = gdn.definition('quoteMention.showProgress', true),
-            target;
+                .data('mouseOver', '1');
+
+        const loaded = mention.data('quoteMention');
+        const showProgress = gdn.definition('quoteMention.showProgress', true);
+        let target;
 
         if (loaded !== undefined) {
             target = $(loaded).addClass('mentionHighlight');
         } else {
             get(mention)
-                .done(function (data) {
+                .done((data) => {
                     // If the mouse is still over the element, highlight the referenced post.
                     if (mention.data('mouseOver')) {
                         target = $(data.target).addClass('mentionHighlight');
@@ -54,7 +54,7 @@ jQuery(function ($) {
                         // Save the target for highlighting.
                         .data('quoteMention', data.target);
                 })
-                .fail(function () {
+                .fail(() => {
                     // No post found or request failed: Remove the tooltip.
                     mention
                         .tooltipster('disable')
@@ -71,8 +71,8 @@ jQuery(function ($) {
 
 
     // mouseleave handler: Hide a tooltip.
-    function hide(e) {
-        var mention = $(e.currentTarget)
+    function hide({currentTarget}) {
+        const mention = $(currentTarget)
             .tooltipster('hide')
             .data('mouseOver', '');
 
@@ -82,26 +82,24 @@ jQuery(function ($) {
 
     // Register event handlers for all mentions on the page.
     function init() {
-        var maxWidth = gdn.definition('quoteMention.maxWidth', 350),
-            position = gdn.definition('quoteMention.position', 'bottom');
+        const maxWidth = gdn.definition('quoteMention.maxWidth', 350);
+        const position = gdn.definition('quoteMention.position', 'bottom');
 
         // Initialized mentions get the "quoteMention" class.
         $('.ItemComment .Message a:not(.quoteMention)')
-            .filter(function (ignore, elem) {
-                // Only grab links that start with an @.
-                return elem.innerHTML.substring(0, 1) === '@';
-            })
+            // Only grab links that start with an @.
+            .filter((ignore, {innerHTML}) => innerHTML.substring(0, 1) === '@')
             .addClass('quoteMention')
             // Initialize the tooltip with the progress animation.
             .tooltipster({
                 content: '<span class="Progress"/>',
                 contentAsHTML: true,
                 trigger: 'custom',
-                position: position,
+                position,
                 speed: 0,
                 updateAnimation: false,
                 theme: 'tooltipster-vanilla',
-                maxWidth: maxWidth
+                maxWidth
             })
             .hover(show, hide);
     }
@@ -110,5 +108,4 @@ jQuery(function ($) {
     // Search for new mentions when comments are added or changed.
     $(document).on('CommentAdded CommentEditingComplete CommentPagingComplete', init);
     init();
-
 });
